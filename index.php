@@ -17,3 +17,4 @@ $lv = new LayoutView();
 
 $lv->render(false, $v, $dtv);
 
+var_dump($v, $dtv, $lv);

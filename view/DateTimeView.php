@@ -4,8 +4,13 @@ class DateTimeView {
 
 
 	public function show() {
+		$dayInWeek = date("l");
+		$day = date("jS");
+		$month = date("F");
+		$year = date("o");
+		$currentTime = date("H:i:s");
 
-		$timeString = 'TODO, Write servertime here...';
+		$timeString = "$dayInWeek, the $day of $month $year, The time is $currentTime";
 
 		return '<p>' . $timeString . '</p>';
 	}
