@@ -6,6 +6,9 @@ class LayoutView {
   public function render($isLoggedIn, LoginView $v, DateTimeView $dtv, RegisterView $rv) {
     $view = (isset($_GET["register"]) ? $rv : $v);
 
+    
+    // var_dump($_POST);
+
     echo '<!DOCTYPE html>
       <html>
         <head>

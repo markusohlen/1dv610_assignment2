@@ -15,7 +15,7 @@ class RegisterView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
-		$message = '';
+        $message = '';
 		
 		$response = $this->generateRegisterFormHTML($message);
 		//$response .= $this->generateLogoutButtonHTML($message);
@@ -67,8 +67,28 @@ class RegisterView {
 	}
 	
 	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
-	private function getRequestUserName() {
-		//RETURN REQUEST VARIABLE: USERNAME
+	// private function getRequestUserName() {
+	// 	return $_POST[self::$userName];
+    // }
+    public function getRequestUserName() {
+		return $_POST[self::$userName];
+    }
+    
+    public function getRequestPassword() {
+        return $_POST[self::$password];
+    }
+
+    public function getRequestPasswordRepeat() {
+        return $_POST[self::$passwordRepeat];
+	}
+	
+	public function personRegistered() {
+		if (isset($_POST[self::$userName]) && isset($_POST[self::$password]) && isset($_POST[self::$passwordRepeat])) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 	
 }
