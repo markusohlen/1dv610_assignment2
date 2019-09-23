@@ -6,7 +6,9 @@ require_once('view/DateTimeView.php');
 require_once('view/LayoutView.php');
 require_once('view/RegisterView.php');
 
-require_once('controller/Controller.php');
+require_once('model/RegisterModel.php');
+
+require_once('controller/RegisterController.php');
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 error_reporting(E_ALL);
@@ -17,10 +19,12 @@ $v = new LoginView();
 $dtv = new DateTimeView();
 $lv = new LayoutView();
 $rv = new RegisterView();
-$controller = new Controller($rv);
+
+$registerModel = new RegisterModel();
+$registerController = new RegisterController($rv, $registerModel);
 
 if (isset($_POST["DoRegistration"])) {
-    $controller->register();
+    $registerController->register();
 }
 $lv->render(false, $v, $dtv, $rv);
 
