@@ -17,9 +17,7 @@ class LayoutView {
         </head>
         <body>
           <h1>Assignment 2</h1>
-          
-          ' . $this->renderIsLoggedIn($isLoggedIn) . '
-          
+          '.$this->renderIsLoggedIn($isLoggedIn).'
           <div class="container">
               ' . $view->response() . '
 
@@ -35,7 +33,7 @@ class LayoutView {
       return '<h2>Logged in</h2>';
     }
     else {
-      return '<h2>Not logged ss in</h2>';
+      return '<h2>Not logged in</h2>';
     }
   }
 }
