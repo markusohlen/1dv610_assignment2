@@ -21,6 +21,9 @@ class LoginController
 
         var_dump($this);
 
+        if ($this->model->userExists($this->username) === true) {
+
+        }
         // if ($this->model->usernameIsValid($this->username) === true && $this->model->passwordsIsValid($this->password, $this->passwordRepeat) === true) {
         //     $this->model->registerUser($this->username, $this->password);
         // }
