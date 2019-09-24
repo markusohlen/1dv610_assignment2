@@ -70,8 +70,25 @@ class LoginView {
 	}
 	
 	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
-	private function getRequestUserName() {
-		//RETURN REQUEST VARIABLE: USERNAME
+	// private function getRequestUserName() {
+	// 	//RETURN REQUEST VARIABLE: USERNAME
+	// }
+
+	public function getRequestUserName() {
+		return $_POST[self::$name];
+	}
+
+	public function getRequestPassword() {
+		return $_POST[self::$password];
+	}
+
+	public function userFilledInForm() {
+		if (isset($_POST[self::$name]) && isset($_POST[self::$password])) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 }

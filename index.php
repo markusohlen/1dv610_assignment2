@@ -7,8 +7,10 @@ require_once('view/LayoutView.php');
 require_once('view/RegisterView.php');
 
 require_once('model/RegisterModel.php');
+require_once('model/LoginModel.php');
 
 require_once('controller/RegisterController.php');
+require_once('controller/LoginController.php');
 
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 error_reporting(E_ALL);
@@ -23,9 +25,16 @@ $rv = new RegisterView();
 $registerModel = new RegisterModel();
 $registerController = new RegisterController($rv, $registerModel);
 
+$loginModel = new LoginModel();
+$loginController = new LoginController($v, $loginModel);
+
 if (isset($_POST["DoRegistration"])) {
     $registerController->register();
 }
+
+if (isset($_POST["LoginView::Login"])) {
+    $loginController->login();
+}
 $lv->render(false, $v, $dtv, $rv);
 
-var_dump($v, $dtv, $lv, $rv);
+// var_dump($v, $dtv, $lv, $rv);

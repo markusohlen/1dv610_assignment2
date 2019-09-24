@@ -88,7 +88,6 @@ class RegisterView {
 		} else {
 			return false;
 		}
-		
 	}
 	
 }
