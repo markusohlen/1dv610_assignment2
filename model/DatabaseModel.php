@@ -8,7 +8,7 @@ class DatabaseModel
         $dbPassword = "";
         $dbname = "1dv610";
 
-        $db = new PDO('mysql:host=localhost;dbname=1dv610;charset=utf8','root','');
+        $db = new PDO('mysql:host=127.0.0.1;dbname=1dv610;charset=utf8','root','');
 
         $stmt = $db->prepare("SELECT * FROM assignment2 WHERE username = ?");
 
