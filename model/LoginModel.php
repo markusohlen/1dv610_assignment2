@@ -8,23 +8,24 @@ class LoginModel
         $dbPassword = "";
         $dbname = "1dv610";
 
-        $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
 
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        $db = new PDO('mysql:host=localhost;dbname=1dv610;charset=utf8','root','');
+
+        $stmt = $db->prepare("SELECT * FROM assignment2 WHERE username = ?");
+
+        $stmt->bindParam(1, $username);
+
+        $stmt->execute();
+
+        $result=$stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            echo "INLOGGAD!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+            return true;
         }
-
-        $sql = "SELECT * 
-            FROM assignment2
-            WHERE username = arakasaga78";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+        else {
+            return false;
         }
-
-        var_dump($sql);
 
         // $stmt = $db->query("SELECT * 
         //     FROM assignment2
@@ -41,6 +42,6 @@ class LoginModel
         //     echo "Error: " . $sql . "<br>" . $conn->error;
         // }
 
-        $conn->close();
+        // $db->close();
     }
 }

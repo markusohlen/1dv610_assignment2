@@ -19,10 +19,8 @@ class LoginController
             $this->password = $this->view->getRequestPassword();
         }
 
-        var_dump($this);
-
         if ($this->model->userExists($this->username) === true) {
-
+            echo "USERNAME $this->username";
         }
         // if ($this->model->usernameIsValid($this->username) === true && $this->model->passwordsIsValid($this->password, $this->passwordRepeat) === true) {
         //     $this->model->registerUser($this->username, $this->password);
