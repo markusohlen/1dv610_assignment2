@@ -25,6 +25,10 @@ class LoginView {
 		if (!$this->userFilledInUsername() && isset($_POST[self::$login])) {
 			$message = 'Username is missing';
 		}
+
+		if (!$this->userFilledInPassword() && isset($_POST[self::$login])) {
+			$message = 'Password is missing';
+		}
 		
 		$response = $this->generateLoginFormHTML($message);
 		//$response .= $this->generateLogoutButtonHTML($message);
@@ -88,6 +92,15 @@ class LoginView {
 
 	public function userFilledInUsername() {
 		if (isset($_POST[self::$name]) && !empty($_POST[self::$name])) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public function userFilledInPassword() {
+		if (isset($_POST[self::$password]) && !empty($_POST[self::$password])) {
 			return true;
 		}
 		else {
