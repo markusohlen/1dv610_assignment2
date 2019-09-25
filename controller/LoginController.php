@@ -1,5 +1,4 @@
 <?php
-require_once('./model/DatabaseModel.php');
 
 class LoginController
 {
@@ -13,7 +12,6 @@ class LoginController
     public function __construct(LoginView $view, LoginModel $model) {
         $this->view = $view;
         $this->model = $model;
-        $this->database = new DatabaseModel();
     }
 
     public function login() {
@@ -23,20 +21,21 @@ class LoginController
         }
 
 
-        if ($this->database->userExists($this->username) === true) {
-            echo "USERNAME $this->username";
-            $user = $this->database->fetchUserLoginData($this->username);
+        // DATABASE
+        // if ($this->database->userExists($this->username) === true) {
+        //     echo "USERNAME $this->username";
+        //     $user = $this->database->fetchUserLoginData($this->username);
             
-            $hash = $user["password"];
-            // var_dump($hash);
-            if ($this->database->comparePasswords($hash, $this->password) === true) {
-                echo "PASSWORDS MATCH!";
-            }
-            else {
-                echo "PASSWORDS DONT MATCH!";
-            }
+        //     $hash = $user["password"];
+        //     // var_dump($hash);
+        //     if ($this->database->comparePasswords($hash, $this->password) === true) {
+        //         echo "PASSWORDS MATCH!";
+        //     }
+        //     else {
+        //         echo "PASSWORDS DONT MATCH!";
+        //     }
             
-        }
+        // }
         // if ($this->model->usernameIsValid($this->username) === true && $this->model->passwordsIsValid($this->password, $this->passwordRepeat) === true) {
         //     $this->model->registerUser($this->username, $this->password);
         // }
