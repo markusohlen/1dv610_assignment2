@@ -17,10 +17,11 @@ class LoginController
     }
 
     public function login() {
-        if ($this->view->userFilledInForm() === true) {
+        if ($this->view->userFilledInUsername() === true) {
             $this->username = $this->view->getRequestUsername();
             $this->password = $this->view->getRequestPassword();
         }
+
 
         if ($this->database->userExists($this->username) === true) {
             echo "USERNAME $this->username";
