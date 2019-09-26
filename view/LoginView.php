@@ -23,24 +23,7 @@ class LoginView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
-		$message = '';
-
-		if (!$this->userFilledInPassword() && isset($_POST[self::$login])) {
-			$message = 'Password is missing';
-		}
-
-		if (!$this->userFilledInUsername() && isset($_POST[self::$login])) {
-			$message = 'Username is missing';
-		}
-
-		
-
-		if ($this->userWantsToLogIn()) {
-			if (!$this->model->usernameExists($this->getRequestUserName()) || !$this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
-				$message = 'Wrong name or password';
-			}
-		}
-		
+		$message = $this->checkInputData();
 		
 		$response = $this->generateLoginFormHTML($message);
 		//$response .= $this->generateLogoutButtonHTML($message);
@@ -156,6 +139,26 @@ class LoginView {
             return true;
         }
         return false;
-    }
+	}
+	
+	private function checkInputData() {
+		if (!$this->userFilledInPassword() && $this->userFilledInUsername() && $this->userWantsToLogIn()) {
+			return 'Password is missing';
+		}
+
+		if (!$this->userFilledInUsername() && $this->userFilledInPassword() && $this->userWantsToLogIn()) {
+			return 'Username is missing';
+		}
+
+		
+
+		if ($this->userWantsToLogIn()) {
+			if (!$this->model->usernameExists($this->getRequestUserName()) || !$this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
+				return 'Wrong name or password';
+			}
+		}
+
+		return '';
+	}
 	
 }
