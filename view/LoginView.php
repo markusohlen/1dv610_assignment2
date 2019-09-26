@@ -143,13 +143,7 @@ class LoginView {
 				return 'Wrong name or password';
 			}
 		}
-
-		if ($this->userWantsToLogIn()) {
-			if ($this->session->isLoggedIn() && $this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
-				$this->session->setLoggedInSession(true);
-				return '';
-			}
-		}
+		
 			
 		if ($this->userWantsToLogIn()) {
 			if (!$this->session->isLoggedIn() && $this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
@@ -157,6 +151,24 @@ class LoginView {
 				return 'Welcome';
 			}
 		}
+
+		// if (isset($_POST["LoginView::Login"])) {
+		// 	// $loginController->login();
+		
+		// 	if ($this->userWantsToLogIn()) {
+		// 		if (!$this->session->isLoggedIn() && $this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
+		// 			$this->session->setLoggedInSession(true);
+		// 		}
+		// 	}
+		// }
+
+		// if ($this->userWantsToLogIn()) {
+		// 	if ($this->session->isLoggedIn() && $this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
+		// 		// $this->session->setLoggedInSession(true);
+		// 		return 'SDAASDSA';
+		// 	}
+		// }
+
 		return '';
 	}
 }
