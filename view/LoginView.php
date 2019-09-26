@@ -68,7 +68,7 @@ class LoginView {
 	* @return  void, BUT writes to standard output!
 	*/
 	private function generateLoginFormHTML($message) {
-		$currentUserName = '';
+		$currentUserName = "";
 		if ($this->userWantsToLogIn() === true) {
 			$currentUserName = $this->getRequestUserName();
 		}
