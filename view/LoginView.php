@@ -34,6 +34,8 @@ class LoginView {
 			$message = 'Username is missing';
 		}
 
+		
+
 		// if ($this->lm->usernameExists($this->getRequestUserName())) {
         //     if ($this->lm->checkUsernameAndPassword($this->getRequestUserName(), $this->password)) {
         //         $this->generateLoginFormHTML('ASDSADSADSADSADASD');
@@ -66,6 +68,11 @@ class LoginView {
 	* @return  void, BUT writes to standard output!
 	*/
 	private function generateLoginFormHTML($message) {
+		$currentUserName = '';
+		if ($this->userWantsToLogIn()) {
+			$currentUserName = $this->getRequestUserName();
+		}
+
 		return '
 		<a href="?register">Register a new user</a>
 			<form method="post" > 
@@ -74,7 +81,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $this->getRequestUserName(); . '" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $currentUserName . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
@@ -112,6 +119,15 @@ class LoginView {
 
 	public function userFilledInPassword() {
 		if (isset($_POST[self::$password]) && !empty($_POST[self::$password])) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private function userWantsToLogIn() {
+		if (isset($_POST[self::$password])) {
 			return true;
 		}
 		else {
