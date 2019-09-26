@@ -69,7 +69,7 @@ class LoginView {
 	*/
 	private function generateLoginFormHTML($message) {
 		$currentUserName = '';
-		if ($this->userWantsToLogIn()) {
+		if ($this->userWantsToLogIn() === true) {
 			$currentUserName = $this->getRequestUserName();
 		}
 
@@ -128,9 +128,12 @@ class LoginView {
 
 	private function userWantsToLogIn() {
 		if (isset($_POST[self::$login])) {
+			echo "User pressed login";
 			return true;
+
 		}
 		else {
+			echo "User didnt press login";
 			return false;
 		}
 	}
