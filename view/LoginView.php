@@ -71,10 +71,11 @@ class LoginView {
 		$currentUserName = "";
 		if ($this->userWantsToLogIn() === true) {
 			$currentUserName = $this->getRequestUserName();
+			echo $currentUserName;
 		}
-
+		// <a href="?register">Register a new user</a>
 		return '
-		<a href="?register">Register a new user</a>
+		
 			<form method="post" > 
 				<fieldset>
 					<legend>Login - enter Username and password</legend>
