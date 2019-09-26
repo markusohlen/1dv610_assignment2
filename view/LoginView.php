@@ -146,7 +146,7 @@ class LoginView {
 			return 'Password is missing';
 		}
 
-		if (!$this->userFilledInUsername() && $this->userFilledInPassword() && $this->userWantsToLogIn()) {
+		if (!$this->userFilledInUsername() && $this->userFilledInPassword() || !$this->userFilledInPassword() && $this->userWantsToLogIn()) {
 			return 'Username is missing';
 		}
 
