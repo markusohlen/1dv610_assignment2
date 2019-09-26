@@ -3,11 +3,11 @@
 
 class LayoutView {
   
-  public function render(LoginView $v, DateTimeView $dtv, RegisterView $rv) {
+  public function render(LoginView $v, DateTimeView $dtv, RegisterView $rv, StorageModel $sm) {
     // $isLoggedIn = $v->getLoggedIn();
     $view = (isset($_GET["register"]) ? $rv : $v);
 
-    $isLoggedIn = $v->checkSession();
+    $isLoggedIn = $sm->isLoggedIn();
 
     echo '<!DOCTYPE html>
       <html>
@@ -29,7 +29,7 @@ class LayoutView {
   }
   
   private function renderIsLoggedIn($isLoggedIn) {
-    var_dump($_SESSION);
+    // var_dump($_SESSION);
     if ($isLoggedIn === true) {
       return '<h2>Logged in</h2>';
     }

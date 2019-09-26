@@ -11,9 +11,11 @@ class LoginView {
 	private static $messageId = 'LoginView::Message';
 
 	private $model;
+	private $session;
 
-	public function __construct($m) {
+	public function __construct($m, $s) {
 		$this->model = $m;
+		$this->session = $s;
 	}
 	/**
 	 * Create HTTP response
@@ -144,19 +146,9 @@ class LoginView {
 			
 		if ($this->userWantsToLogIn()) {
 			if ($this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
-				$_SESSION["isLoggedIn"] = true;
+				$this->session->setLoggedInSession(true);
 			}
 		}
 		return '';
 	}
-
-	public function checkSession() {
-		if (isset($_SESSION["isLoggedIn"])) {
-			return true;
-		  }
-		  else {
-			return false;
-		  }
-	}
-	
 }
