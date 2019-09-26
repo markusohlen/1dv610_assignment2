@@ -145,7 +145,7 @@ class LoginView {
 		}
 			
 		if ($this->userWantsToLogIn()) {
-			if ($this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
+			if (!$this->session->isLoggedIn() && $this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
 				$this->session->setLoggedInSession(true);
 				return 'Welcome';
 			}
