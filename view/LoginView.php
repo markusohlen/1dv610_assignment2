@@ -127,7 +127,7 @@ class LoginView {
 	}
 
 	private function userWantsToLogIn() {
-		if (isset($_POST[self::$password])) {
+		if (isset($_POST[self::$login])) {
 			return true;
 		}
 		else {
