@@ -10,12 +10,6 @@ class LoginView {
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
 
-	// private $lm;
-
-	// public function __construct($lm) {
-	// 	$this->lm = $lm;
-	// }
-
 	/**
 	 * Create HTTP response
 	 *
@@ -68,11 +62,11 @@ class LoginView {
 	* @return  void, BUT writes to standard output!
 	*/
 	private function generateLoginFormHTML($message) {
-		// $currentUserName = "";
-		// if ($this->userWantsToLogIn() === true) {
-		// 	$currentUserName = $this->getRequestUserName();
-		// 	echo $currentUserName;
-		// }
+		$currentUserName = "";
+		if ($this->userWantsToLogIn() === true) {
+			$currentUserName = $this->getRequestUserName();
+			// echo $currentUserName;
+		}
 
 		return '
 		<a href="?register">Register a new user</a>
@@ -82,7 +76,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $currentUserName . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
@@ -106,7 +100,7 @@ class LoginView {
 	}
 
 	public function getRequestPassword() {
-		return $_POST[self::$password];
+		return "$_POST[self::$password]";
 	}
 
 	public function userFilledInUsername() {
