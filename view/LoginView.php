@@ -126,14 +126,11 @@ class LoginView {
 		}
 	}
 
-	private function userWantsToLogIn() {
+	public function userWantsToLogIn() {
 		if (isset($_POST[self::$login])) {
-			echo "User pressed login";
 			return true;
-
 		}
 		else {
-			echo "User didnt press login";
 			return false;
 		}
 	}
