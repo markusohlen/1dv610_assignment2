@@ -10,7 +10,11 @@ class LoginView {
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
 
-	
+	private $lm;
+
+	public function __construct($lm) {
+		$this->lm = $lm;
+	}
 
 	/**
 	 * Create HTTP response
@@ -30,7 +34,12 @@ class LoginView {
 			$message = 'Username is missing';
 		}
 
-		
+		// if ($this->lm->usernameExists($this->getRequestUserName())) {
+        //     if ($this->lm->checkUsernameAndPassword($this->getRequestUserName(), $this->password)) {
+        //         $this->generateLoginFormHTML('ASDSADSADSADSADASD');
+        //         echo "USERNAME AND PASSWORD IS CORRECT!";
+        //     }
+        // }
 		
 		$response = $this->generateLoginFormHTML($message);
 		//$response .= $this->generateLogoutButtonHTML($message);
@@ -65,7 +74,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $this->getRequestUserName() . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />

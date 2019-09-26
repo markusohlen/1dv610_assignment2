@@ -17,15 +17,15 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 //CREATE OBJECTS OF THE VIEWS
-$v = new LoginView();
+$registerModel = new RegisterModel();
+$loginModel = new LoginModel();
+
+$v = new LoginView($loginModel);
 $dtv = new DateTimeView();
 $lv = new LayoutView();
 $rv = new RegisterView();
 
-$registerModel = new RegisterModel();
 $registerController = new RegisterController($rv, $registerModel);
-
-$loginModel = new LoginModel();
 $loginController = new LoginController($v, $loginModel);
 
 if (isset($_POST["DoRegistration"])) {

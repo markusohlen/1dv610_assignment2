@@ -25,11 +25,7 @@ class LoginController
 
         var_dump($this->model->usernameExists($this->username));
         
-        if ($this->model->usernameExists($this->username)) {
-            if ($this->model->checkUsernameAndPassword($this->username, $this->password)) {
-                echo "USERNAME AND PASSWORD IS CORRECT!";
-            }
-        }
+        
 
         // DATABASE
         // if ($this->database->userExists($this->username) === true) {
