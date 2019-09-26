@@ -41,6 +41,12 @@ if (isset($_POST["DoRegistration"])) {
 
 if (isset($_POST["LoginView::Login"])) {
     $loginController->login();
+
+    if ($v->userWantsToLogIn()) {
+        if (!$storageModel->isLoggedIn() && $loginModel->usernameExists($v->getRequestUserName()) && $loginModel->checkUsernameAndPassword($v->getRequestUserName(), $v->getRequestPassword())) {
+            $storageModel->setLoggedInSession(true);
+        }
+    }
 }
 
 $lv->render($v, $dtv, $rv, $storageModel);
