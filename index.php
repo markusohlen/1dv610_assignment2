@@ -23,7 +23,7 @@ session_start();
 $loginModel = new LoginModel();
 $storageModel = new StorageModel();
 
-if ($storageModel->isLoggedIn() === false) {
+if ($storageModel->sessionIsSet() === false) {
     $storageModel->setLoggedInSession(false);
 }
 
