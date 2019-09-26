@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //INCLUDE THE FILES NEEDED...
 require_once('view/LoginView.php');
 require_once('view/DateTimeView.php');
@@ -35,6 +35,7 @@ if (isset($_POST["DoRegistration"])) {
 if (isset($_POST["LoginView::Login"])) {
     $loginController->login();
 }
-$lv->render(false, $v, $dtv, $rv);
+
+$lv->render($v, $dtv, $rv);
 
 // var_dump($v, $dtv, $lv, $rv);

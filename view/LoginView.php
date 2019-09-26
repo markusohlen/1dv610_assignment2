@@ -118,27 +118,13 @@ class LoginView {
 		}
 	}
 
-	public function usernameExists($username) {
-        foreach ($this->usernames as $user) {
-            if ($user->username === $username) {
-                return true;
-            }
-        }
-        return false;
-    }
+	public function getLoggedIn() {
+		if (isset($_COOKIE["loggedIn"])) {
+			return true;
+		}
 
-    public function checkUsernameAndPassword($username, $password) {
-        $user;
-        foreach ($this->usernames as $u) {
-            if ($u->username === $username) {
-                $user = $u;
-            }
-        }
-
-        if ($user->password === $password) {
-            return true;
-        }
-        return false;
+		
+		return false;
 	}
 	
 	private function checkInputData() {
@@ -150,15 +136,27 @@ class LoginView {
 			return 'Username is missing';
 		}
 
-		
-
 		if ($this->userWantsToLogIn()) {
 			if (!$this->model->usernameExists($this->getRequestUserName()) || !$this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
 				return 'Wrong name or password';
 			}
 		}
-
+			
+		if ($this->userWantsToLogIn()) {
+			if ($this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
+				$_SESSION["isLoggedIn"] = true;
+			}
+		}
 		return '';
+	}
+
+	public function checkSession() {
+		if (isset($_SESSION["isLoggedIn"])) {
+			return true;
+		  }
+		  else {
+			return false;
+		  }
 	}
 	
 }
