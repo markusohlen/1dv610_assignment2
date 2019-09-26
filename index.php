@@ -20,7 +20,7 @@ ini_set('display_errors', 'On');
 // $registerModel = new RegisterModel();
 $loginModel = new LoginModel();
 
-$v = new LoginView();
+$v = new LoginView($loginModel);
 $dtv = new DateTimeView();
 $lv = new LayoutView();
 $rv = new RegisterView();

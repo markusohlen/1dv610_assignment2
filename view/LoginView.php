@@ -10,6 +10,11 @@ class LoginView {
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
 
+	private $model;
+
+	public function __construct($m) {
+		$this->model = $m;
+	}
 	/**
 	 * Create HTTP response
 	 *
@@ -30,12 +35,12 @@ class LoginView {
 
 		
 
-		// if ($this->lm->usernameExists($this->getRequestUserName())) {
-        //     if ($this->lm->checkUsernameAndPassword($this->getRequestUserName(), $this->password)) {
-        //         $this->generateLoginFormHTML('ASDSADSADSADSADASD');
-        //         echo "USERNAME AND PASSWORD IS CORRECT!";
-        //     }
-        // }
+		if ($this->userWantsToLogIn()) {
+			if (!$this->model->usernameExists($this->getRequestUserName()) || !$this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
+				$message = 'Wrong name or password';
+			}
+		}
+		
 		
 		$response = $this->generateLoginFormHTML($message);
 		//$response .= $this->generateLogoutButtonHTML($message);
@@ -129,5 +134,28 @@ class LoginView {
 			return false;
 		}
 	}
+
+	public function usernameExists($username) {
+        foreach ($this->usernames as $user) {
+            if ($user->username === $username) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function checkUsernameAndPassword($username, $password) {
+        $user;
+        foreach ($this->usernames as $u) {
+            if ($u->username === $username) {
+                $user = $u;
+            }
+        }
+
+        if ($user->password === $password) {
+            return true;
+        }
+        return false;
+    }
 	
 }
