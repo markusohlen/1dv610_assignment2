@@ -17,7 +17,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 //CREATE OBJECTS OF THE VIEWS
-$registerModel = new RegisterModel();
+// $registerModel = new RegisterModel();
 $loginModel = new LoginModel();
 
 $v = new LoginView($loginModel);
@@ -25,7 +25,7 @@ $dtv = new DateTimeView();
 $lv = new LayoutView();
 $rv = new RegisterView();
 
-$registerController = new RegisterController($rv, $registerModel);
+// $registerController = new RegisterController($rv, $registerModel);
 $loginController = new LoginController($v, $loginModel);
 
 if (isset($_POST["DoRegistration"])) {

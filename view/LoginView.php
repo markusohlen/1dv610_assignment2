@@ -73,16 +73,16 @@ class LoginView {
 			$currentUserName = $this->getRequestUserName();
 			echo $currentUserName;
 		}
-		// <a href="?register">Register a new user</a>
+
 		return '
-		
+		<a href="?register">Register a new user</a>
 			<form method="post" > 
 				<fieldset>
 					<legend>Login - enter Username and password</legend>
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $currentUserName . '" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
