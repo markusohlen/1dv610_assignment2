@@ -23,7 +23,7 @@ class LoginController
             return; 
         }
 
-        var_dump($this->model->usernameExists($this->username));
+        // var_dump($this->model->usernameExists($this->username));
         
         
 
