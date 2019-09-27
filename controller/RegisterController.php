@@ -24,7 +24,9 @@ class RegisterController
         $message = $this->generateMessage();
         $this->view->setMessage($message);
 
-       
+       if (!$message === '') {
+           return;
+       }
 
         if ($this->model->usernameIsValid($this->username) === true && $this->model->passwordsIsValid($this->password, $this->passwordRepeat) === true) {
             $this->model->registerUser($this->username, $this->password);
