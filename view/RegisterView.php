@@ -74,7 +74,7 @@ class RegisterView {
 	}
 	
 	public function personPressedRegister() {
-		if (isset($_POST['RegisterView::Register=Register'])) {
+		if (isset($_POST["RegisterView::Register"]) && $_POST["RegisterView::Register"] === "Register") {
 			return true;
 		} else {
 			return false;
