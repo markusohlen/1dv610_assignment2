@@ -4,14 +4,16 @@ class RegisterController
 {
     private $view;
     private $model;
+    private $userModel;
 
     private $username;
     private $password;
     private $passwordRepeat;
 
-    public function __construct(RegisterView $view, RegisterModel $model) {
+    public function __construct(RegisterView $view, RegisterModel $model, $userModel) {
         $this->view = $view;
         $this->model = $model;
+        $this->userModel = $userModel;
     }
 
     public function register() {
@@ -46,6 +48,10 @@ class RegisterController
 
         if ($this->model->passwordsIsTooShort($this->password, $this->passwordRepeat)) {
             $message .= "Password has too few characters, at least 6 characters.<br>";
+        }
+
+        if ($this->userModel->usernameExists($this->username)) {
+            $message .= "User exists, pick another username.<br>";
         }
 
         return $message;

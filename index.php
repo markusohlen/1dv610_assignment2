@@ -32,7 +32,7 @@ $dtv = new DateTimeView();
 $lv = new LayoutView();
 $rv = new RegisterView();
 
-$rc = new RegisterController($rv, $registerModel);
+$rc = new RegisterController($rv, $registerModel, $userModel);
 
 if (isset($_POST["RegisterView::Register"]) && $_POST["RegisterView::Register"] === "Register") {
     $rc->register();
