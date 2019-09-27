@@ -8,7 +8,7 @@ class UserModel
         // array_push($this->usernames, $obj, $obj2);
     }
     public function usernameExists($username) {
-        foreach ($this->usernames as $user) {
+        foreach ($this->fetchUsers() as $user) {         
             if ($user->username === $username) {
                 return true;
             }
