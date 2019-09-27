@@ -85,11 +85,6 @@ class LoginView {
 			</form>
 		';
 	}
-	
-	//CREATE GET-FUNCTIONS TO FETCH REQUEST VARIABLES
-	// private function getRequestUserName() {
-	// 	//RETURN REQUEST VARIABLE: USERNAME
-	// }
 
 	public function getRequestUserName() {
 		return $_POST[self::$name];
@@ -152,38 +147,25 @@ class LoginView {
 		
 			
 		if ($this->userWantsToLogIn()) {
-			// var_dump($this->loggedInFistTime);
 			if ($this->loggedInFistTime === true && $this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
-				// $this->session->setLoggedInSession(true);
-				// echo "KKKKKK";
-				// $this->changeLoggedInFirstTime(false);
+				$pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+				if ($pageWasRefreshed && $this->session->isLoggedIn()) {
+					return '';
+				}
 				return 'Welcome';
 			}
+		}
+
+		if ($this->userPressedLogout()) {
+			return 'Bye bye!';
 		}
 
 		if ($this->session->isLoggedIn() && $this->userPressedLogout()) {
 			$this->changeLoggedInFirstTime(false);
 		}
 
-		// var_dump($this->session->isLoggedIn());
-
-		// if (isset($_POST["LoginView::Login"])) {
-		// 	// $loginController->login();
-		
-		// 	if ($this->userWantsToLogIn()) {
-		// 		if (!$this->session->isLoggedIn() && $this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
-		// 			$this->session->setLoggedInSession(true);
-		// 		}
-		// 	}
-		// }
-
-		// if ($this->userWantsToLogIn()) {
-		// 	if ($this->session->isLoggedIn() && $this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
-		// 		// $this->session->setLoggedInSession(true);
-		// 		return 'SDAASDSA';
-		// 	}
-		// }
-
+		// $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+		// var_dump($pageWasRefreshed);
 		return '';
 	}
 

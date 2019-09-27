@@ -4,10 +4,7 @@
 class LayoutView {
   
   public function render(LoginView $v, DateTimeView $dtv, RegisterView $rv, StorageModel $sm) {
-    // $isLoggedIn = $v->getLoggedIn();
     $view = (isset($_GET["register"]) ? $rv : $v);
-
-    
 
     echo '<!DOCTYPE html>
       <html>
@@ -29,9 +26,7 @@ class LayoutView {
   }
   
   private function renderIsLoggedIn($sm) {
-    $isLoggedIn = $sm->isLoggedIn();
-    // var_dump($_SESSION);
-    if ($isLoggedIn === true) {
+    if ($sm->isLoggedIn() === true) {
       return '<h2>Logged in</h2>';
     }
     else {

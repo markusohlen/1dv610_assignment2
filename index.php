@@ -32,23 +32,6 @@ $dtv = new DateTimeView();
 $lv = new LayoutView();
 $rv = new RegisterView();
 
-// $registerController = new RegisterController($rv, $registerModel);
-// $loginController = new LoginController($v, $loginModel);
-
-// if (isset($_POST["DoRegistration"])) {
-//     $registerController->register();
-// }
-
-// if (isset($_POST["LoginView::Login"])) {
-//     // $loginController->login();
-
-//     if ($v->userWantsToLogIn()) {
-//         if (!$storageModel->isLoggedIn() && $loginModel->usernameExists($v->getRequestUserName()) && $loginModel->checkUsernameAndPassword($v->getRequestUserName(), $v->getRequestPassword())) {
-//             $storageModel->setLoggedInSession(true);
-//         }
-//     }
-// }
-
 if (isset($_POST["LoginView::Login"]) && $v->userFilledInUsername() && $v->userFilledInPassword() && $loginModel->checkUsernameAndPassword($v->getRequestUserName(), $v->getRequestPassword())) {
     $storageModel->setLoggedInSession(true);
     $v->changeLoggedInFirstTime(true);
