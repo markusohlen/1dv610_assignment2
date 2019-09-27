@@ -50,7 +50,13 @@ $rv = new RegisterView();
 // }
 
 if (isset($_POST["LoginView::Login"])) {
+    $storageModel->setLoggedInSession(true);
+    $v->changeLoggedInFirstTime(true);
+}
 
+if (isset($_POST["LoginView::Logout"])) {
+    $storageModel->setLoggedInSession(false);
+    $v->changeLoggedInFirstTime(false);
 }
 
 $lv->render($v, $dtv, $rv, $storageModel);

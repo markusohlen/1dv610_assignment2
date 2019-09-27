@@ -12,6 +12,7 @@ class LoginView {
 
 	private $model;
 	private $session;
+	private $loggedInFistTime = false;
 
 	public function __construct($m, $s) {
 		$this->model = $m;
@@ -27,7 +28,12 @@ class LoginView {
 	public function response() {
 		$message = $this->checkInputData();
 		
+		
 		$response = $this->generateLoginFormHTML($message);
+
+		if ($this->session->isLoggedIn()) {
+			$response = $this->generateLogoutButtonHTML($message);
+		}
 		//$response .= $this->generateLogoutButtonHTML($message);
 		return $response;
 	}
@@ -146,10 +152,17 @@ class LoginView {
 		
 			
 		if ($this->userWantsToLogIn()) {
-			if (!$this->session->isLoggedIn() && $this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
-				$this->session->setLoggedInSession(true);
+			// var_dump($this->loggedInFistTime);
+			if ($this->loggedInFistTime === true && $this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
+				// $this->session->setLoggedInSession(true);
+				// echo "KKKKKK";
+				// $this->changeLoggedInFirstTime(false);
 				return 'Welcome';
 			}
+		}
+
+		if ($this->session->isLoggedIn()) {
+			$this->changeLoggedInFirstTime(false);
 		}
 
 		// if (isset($_POST["LoginView::Login"])) {
@@ -170,5 +183,10 @@ class LoginView {
 		// }
 
 		return '';
+	}
+
+
+	public function changeLoggedInFirstTime($state) {
+		$this->loggedInFistTime = $state;
 	}
 }
