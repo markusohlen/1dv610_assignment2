@@ -32,13 +32,17 @@ $dtv = new DateTimeView();
 $lv = new LayoutView();
 $rv = new RegisterView();
 
-if (isset($_POST["LoginView::Login"]) && $v->userFilledInUsername() && $v->userFilledInPassword() && $loginModel->checkUsernameAndPassword($v->getRequestUserName(), $v->getRequestPassword())) {
+if ($storageModel->isCookieSet() || isset($_POST["LoginView::Login"]) && $v->userFilledInUsername() && $v->userFilledInPassword() && $loginModel->checkUsernameAndPassword($v->getRequestUserName(), $v->getRequestPassword())) {
     $storageModel->setLoggedInSession(true);
+    if ($v->getKeepLoggedIn()) {
+        $storageModel->setKeepLoggedIn();
+    }
     $v->changeLoggedInFirstTime(true);
 }
 
 if (isset($_POST["LoginView::Logout"])) {
     $storageModel->setLoggedInSession(false);
+    $storageModel->changeCookie();
     $v->changeLoggedInFirstTime(false);
 }
 

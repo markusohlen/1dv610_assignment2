@@ -94,6 +94,13 @@ class LoginView {
 		return $_POST[self::$password];
 	}
 
+	public function getKeepLoggedIn() {
+		if (isset($_POST[self::$keep])) {
+			return true;
+		}
+		return false;
+	}
+
 	public function userFilledInUsername() {
 		if (isset($_POST[self::$name]) && !empty($_POST[self::$name])) {
 			return true;
@@ -143,6 +150,10 @@ class LoginView {
 			if (!$this->model->usernameExists($this->getRequestUserName()) || !$this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
 				return 'Wrong name or password';
 			}
+		}
+
+		if ($this->userWantsToLogIn() && $this->getKeepLoggedIn()) {
+			$this->session->setKeepLoggedIn();
 		}
 		
 			
