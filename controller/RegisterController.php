@@ -42,7 +42,7 @@ class RegisterController
             $message .= "Username has too few characters, at least 3 characters.<br>";
         }
 
-        if (!$this->model->passwordsIsTooShort($this->password, $this->passwordRepeat)) {
+        if ($this->model->passwordsIsTooShort($this->password, $this->passwordRepeat)) {
             $message .= "Password has too few characters, at least 6 characters.<br>";
         }
 
