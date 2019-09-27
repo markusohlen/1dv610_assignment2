@@ -25,11 +25,15 @@ class LoginModel
     }
 
     public function checkUsernameAndPassword($username, $password) {
-        $user;
+        $user = null;
         foreach ($this->usernames as $u) {
             if ($u->username === $username) {
                 $user = $u;
             }
+        }
+
+        if ($user === null) {
+            return false;
         }
 
         if ($user->password === $password) {

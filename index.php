@@ -49,7 +49,7 @@ $rv = new RegisterView();
 //     }
 // }
 
-if (isset($_POST["LoginView::Login"])) {
+if (isset($_POST["LoginView::Login"]) && $v->userFilledInUsername() && $v->userFilledInPassword() && $loginModel->checkUsernameAndPassword($v->getRequestUserName(), $v->getRequestPassword())) {
     $storageModel->setLoggedInSession(true);
     $v->changeLoggedInFirstTime(true);
 }
