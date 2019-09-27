@@ -25,7 +25,7 @@ class RegisterModel {
     }
 
     public function passwordsIsTooShort ($password, $passwordRepeat) {
-        if (strlen($password) >=6) {
+        if (strlen($password) > 6 || $passwordRepeat > 6) {
             return true;
         }
         else {

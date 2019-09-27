@@ -34,7 +34,7 @@ $rv = new RegisterView();
 
 $rc = new RegisterController($rv, $registerModel);
 
-if (isset($_POST["RegisterView::Register=Register"])) {
+if (isset($_POST["RegisterView::Register"]) && $_POST["RegisterView::Register"] === "Register") {
     $rc->register();
 }
 
