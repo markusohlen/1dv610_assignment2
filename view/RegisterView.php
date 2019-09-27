@@ -4,9 +4,13 @@ class RegisterView {
     private static $userName = "RegisterView::UserName";
     private static $registerViewMessage = "RegisterView::Message";
     private static $password = "RegisterView::Password";
-    private static $passwordRepeat = "RegisterView::PasswordRepeat";
+	private static $passwordRepeat = "RegisterView::PasswordRepeat";
 	
-
+	private $message;
+	
+	public function setMessage($msg) {
+		$this->message = $msg;
+	}
 	/**
 	 * Create HTTP response
 	 *
@@ -59,7 +63,7 @@ class RegisterView {
                         <label for="' . self::$passwordRepeat . '" >Repeat password  :</label>
                         <input type="password" size="20" name="' . self::$passwordRepeat . '" id="' . self::$passwordRepeat . '" value="" />
                         <br/>
-                        <input id="submit" type="submit" name="DoRegistration"  value="Register" />
+                        <input id="submit" type="submit" name="RegisterView::Register=Register"  value="Register" />
                         <br/>
                     </fieldset>
                 </form>

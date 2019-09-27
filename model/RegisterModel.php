@@ -1,11 +1,12 @@
 <?php
 
 class RegisterModel {
-    public function usernameIsValid ($username) {
-        // $whitelist = '/[a-zA-Z]\d/';
+    private $userModel;
 
-        // return preg_match($whitelist, '', $username);
-        echo $username;
+    public function __construct(UserModel $um) {
+        $this->userModel = $um;
+    }
+    public function usernameIsValid ($username) {
         if (strlen($username) > 3) {
             return true;
         } 
@@ -21,32 +22,9 @@ class RegisterModel {
         else {
             return false;
         }
-        // echo password_hash($password, PASSWORD_DEFAULT);
     }
 
-    public function registerUser ($userName, $password) {
-        $servername = "localhost";
-        $dbUsername = "root";
-        $dbPassword = "";
-        $dbname = "1dv610";
-
-        $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $sql = "INSERT INTO assignment2 (username, password)
-        VALUES ('$userName', '$hashedPassword')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-
-        $conn->close();
+    public function registerUser ($username, $password) {
+        $this->userModel->saveUser($username, $password);
     }
 }

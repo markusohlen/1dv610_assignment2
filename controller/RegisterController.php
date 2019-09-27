@@ -23,6 +23,8 @@ class RegisterController
 
         if ($this->model->usernameIsValid($this->username) === true && $this->model->passwordsIsValid($this->password, $this->passwordRepeat) === true) {
             $this->model->registerUser($this->username, $this->password);
+            
+            
         }
         // $this->model->usernameIsValid($this->username);
         // $this->model->passwordsIsValid($this->password, $this->passwordRepeat);

@@ -1,6 +1,6 @@
 <?php
 
-class LoginModel
+class UserModel
 {
     private $usernames = array();
 
@@ -40,5 +40,12 @@ class LoginModel
             return true;
         }
         return false;
+    }
+
+    public function saveUser($username, $password) {
+        $userObj = new stdClass();
+        $userObj->username = $username;
+        $userObj->password = $password;
+        array_push($this->usernames, $userObj);
     }
 }
