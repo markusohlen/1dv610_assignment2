@@ -25,10 +25,12 @@ class RegisterModel {
     }
 
     public function passwordsIsTooShort ($password, $passwordRepeat) {
-        if (strlen($password) > 6 || $passwordRepeat > 6) {
+        if (strlen($password) < 6 || strlen($passwordRepeat) < 6) {
+            echo "PXD är minder än 6";
             return true;
         }
         else {
+            echo "PXD är större än 6";
             return false;
         }
     }
