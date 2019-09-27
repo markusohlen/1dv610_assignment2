@@ -3,8 +3,7 @@
 
 class LayoutView {
   
-  public function render(LoginView $v, DateTimeView $dtv, RegisterView $rv, StorageModel $sm) {
-    $view = (isset($_GET["register"]) ? $rv : $v);
+  public function render($renderView, LoginView $v, DateTimeView $dtv, RegisterView $rv, StorageModel $sm) {
 
     echo '<!DOCTYPE html>
       <html>
@@ -16,7 +15,7 @@ class LayoutView {
           <h1>Assignment 2</h1>
           ' . $this->renderIsLoggedIn($sm) . '
           <div class="container">
-              ' . $view->response() . '
+              ' . $renderView->response() . '
 
               ' . $dtv->show() . '
           </div>

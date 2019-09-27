@@ -46,4 +46,6 @@ if (isset($_POST["LoginView::Logout"])) {
     $v->changeLoggedInFirstTime(false);
 }
 
-$lv->render($v, $dtv, $rv, $storageModel);
+$renderView = (isset($_GET["register"]) ? $rv : $v);
+
+$lv->render($renderView, $v, $dtv, $rv, $storageModel);
