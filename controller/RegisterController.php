@@ -54,6 +54,10 @@ class RegisterController
             $message .= "User exists, pick another username.<br>";
         }
 
+        if (!$this->userModel->passwordsMatch($this->password, $this->passwordRepeat)) {
+            $message .= "Passwords do not match.";
+        }
+
         return $message;
     }
 }

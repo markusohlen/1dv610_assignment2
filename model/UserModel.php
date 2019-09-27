@@ -42,6 +42,13 @@ class UserModel
         return false;
     }
 
+    public function passwordsMatch($password, $passwordRepeat) {
+        if ($password === $passwordRepeat) {
+            return true;
+        }
+        return false;
+    }
+
     public function saveUser($username, $password) {
         $userObj = new stdClass();
         $userObj->username = $username;
