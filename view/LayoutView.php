@@ -31,7 +31,7 @@ class LayoutView {
   private function renderIsLoggedIn($sm) {
     $isLoggedIn = $sm->isLoggedIn();
     // var_dump($_SESSION);
-    if ($isLoggedIn === true && isset($_POST["LoginView::Login"])) {
+    if ($isLoggedIn === true) {
       return '<h2>Logged in</h2>';
     }
     else {

@@ -126,13 +126,13 @@ class LoginView {
 		}
 	}
 
-	public function getLoggedIn() {
-		if (isset($_COOKIE["loggedIn"])) {
+	public function userPressedLogout() {
+		if (isset($_POST[self::$logout])) {
 			return true;
 		}
-
-		
-		return false;
+		else {
+			return false;
+		}
 	}
 	
 	private function checkInputData() {
@@ -161,9 +161,11 @@ class LoginView {
 			}
 		}
 
-		if ($this->session->isLoggedIn()) {
+		if ($this->session->isLoggedIn() && $this->userPressedLogout()) {
 			$this->changeLoggedInFirstTime(false);
 		}
+
+		// var_dump($this->session->isLoggedIn());
 
 		// if (isset($_POST["LoginView::Login"])) {
 		// 	// $loginController->login();
