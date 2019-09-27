@@ -24,6 +24,15 @@ class RegisterModel {
         }
     }
 
+    public function passwordsIsTooShort ($password, $passwordRepeat) {
+        if (strlen($password) >=6) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public function registerUser ($username, $password) {
         $this->userModel->saveUser($username, $password);
     }

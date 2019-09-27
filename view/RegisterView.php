@@ -6,11 +6,12 @@ class RegisterView {
     private static $password = "RegisterView::Password";
 	private static $passwordRepeat = "RegisterView::PasswordRepeat";
 	
-	private $message;
+	private $message = '';
 	
 	public function setMessage($msg) {
 		$this->message = $msg;
 	}
+
 	/**
 	 * Create HTTP response
 	 *
@@ -19,25 +20,11 @@ class RegisterView {
 	 * @return  void BUT writes to standard output and cookies!
 	 */
 	public function response() {
-        $message = '';
+		$message = '';
 		
 		$response = $this->generateRegisterFormHTML($message);
 		//$response .= $this->generateLogoutButtonHTML($message);
 		return $response;
-	}
-
-	/**
-	* Generate HTML code on the output buffer for the logout button
-	* @param $message, String output message
-	* @return  void, BUT writes to standard output!
-	*/
-	private function generateLogoutButtonHTML($message) {
-		return '
-			<form  method="post" >
-				<p id="' . self::$messageId . '">' . $message .'</p>
-				<input type="submit" name="' . self::$logout . '" value="logout"/>
-			</form>
-		';
 	}
 	
 	/**
@@ -53,7 +40,7 @@ class RegisterView {
                 <form action="?register" method="post" enctype="multipart/form-data">
                     <fieldset>
                     <legend>Register a new user - Write username and password</legend>
-                        <p id="' . self::$registerViewMessage . '"></p>
+                        <p id="' . self::$registerViewMessage . '">' . $this->message .'</p>
                         <label for="' . self::$userName . '" >Username :</label>
                         <input type="text" size="20" name="' . self::$userName . '" id="' . self::$userName . '" value="" />
                         <br/>
@@ -86,6 +73,14 @@ class RegisterView {
         return $_POST[self::$passwordRepeat];
 	}
 	
+	public function personPressedRegister() {
+		if (isset($_POST['RegisterView::Register=Register'])) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function personRegistered() {
 		if (isset($_POST[self::$userName]) && isset($_POST[self::$password]) && isset($_POST[self::$passwordRepeat])) {
 			return true;
