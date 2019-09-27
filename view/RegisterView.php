@@ -33,6 +33,21 @@ class RegisterView {
 	* @return  void, BUT writes to standard output!
 	*/
 	private function generateRegisterFormHTML($message) {
+		$currentUsername = "";
+		if ($this->personPressedRegister() === true) {
+			$currentUsername = $this->getRequestUserName();
+		}
+
+		$currentPassword = "";
+		if ($this->personPressedRegister() === true) {
+			$currentPassword = $this->getRequestUserName();
+		}
+
+		$currentPasswordRepeat = "";
+		if ($this->personPressedRegister() === true) {
+			$currentPasswordRepeat = $this->getRequestPasswordRepeat();
+		}
+
 		return '
         <a href="?">Back to Login</a><div class="container" >
           
@@ -42,13 +57,13 @@ class RegisterView {
                     <legend>Register a new user - Write username and password</legend>
                         <p id="' . self::$registerViewMessage . '">' . $this->message .'</p>
                         <label for="' . self::$userName . '" >Username :</label>
-                        <input type="text" size="20" name="' . self::$userName . '" id="' . self::$userName . '" value="" />
+                        <input type="text" size="20" name="' . self::$userName . '" id="' . self::$userName . '" value="' . $currentUsername . '" />
                         <br/>
                         <label for="' . self::$password . '" >Password  :</label>
-                        <input type="password" size="20" name="' . self::$password . '" id="' . self::$password . '" value="" />
+                        <input type="password" size="20" name="' . self::$password . '" id="' . self::$password . '" value="' . $currentPassword . '" />
                         <br/>
                         <label for="' . self::$passwordRepeat . '" >Repeat password  :</label>
-                        <input type="password" size="20" name="' . self::$passwordRepeat . '" id="' . self::$passwordRepeat . '" value="" />
+                        <input type="password" size="20" name="' . self::$passwordRepeat . '" id="' . self::$passwordRepeat . '" value="' . $currentPasswordRepeat . '" />
                         <br/>
                         <input id="submit" type="submit" name="RegisterView::Register"  value="Register" />
                         <br/>
