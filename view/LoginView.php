@@ -147,7 +147,7 @@ class LoginView {
 		}
 
 		if ($this->userWantsToLogIn()) {
-			if ($this->model->usernameExists($this->getRequestUserName()) && !$this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
+			if (!$this->model->usernameExists($this->getRequestUserName()) || !$this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
 				return 'Wrong name or password';
 			}
 		}
