@@ -2,11 +2,6 @@
 
 class UserModel
 {
-    private $usernames = array();
-
-    public function __construct() {
-        // array_push($this->usernames, $obj, $obj2);
-    }
     public function usernameExists($username) {
         foreach ($this->fetchUsers() as $user) {         
             if ($user->username === $username) {
@@ -50,19 +45,15 @@ class UserModel
 
         $json_data = json_decode($json, true);
 
-        // var_dump(typeof($json_data));
-
         foreach ($json_data as $value) {
             $obj = new stdClass();
-            // var_dump($value);
+
             $obj->username = $value["username"];
             $obj->password = $value["password"];
 
-            // var_dump($value);
             array_push($users, $obj);
         }
         return $users;
-        // var_dump($users);
     }
 
     public function saveUser($username, $password) {
