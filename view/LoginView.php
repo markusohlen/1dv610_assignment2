@@ -163,10 +163,6 @@ class LoginView {
 		
 		if ($this->userWantsToLogIn()) {
 			if ($this->model->usernameExists($this->getRequestUserName()) && $this->model->checkUsernameAndPassword($this->getRequestUserName(), $this->getRequestPassword())) {
-				// $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
-				// if ($pageWasRefreshed && $this->session->isLoggedIn()) {
-				// 	return '';
-				// }
 				
 				return 'Welcome';
 			}
@@ -180,8 +176,6 @@ class LoginView {
 			$this->changeLoggedInFirstTime(false);
 		}
 
-		// $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
-		// var_dump($pageWasRefreshed);
 		return '';
 	}
 

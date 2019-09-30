@@ -40,33 +40,54 @@ class UserModel
     }
 
     private function fetchUsers() {
-        $json = file_get_contents('./data/users.json');
         $users = array();
 
-        $json_data = json_decode($json, true);
+        $port = 3306;
+        $servername = "127.0.0.1";
+        $dbusername = "dnpyesqv";
+        $dbpassword = "XhBS515uxx[8;J";
+        $dbname = "dnpyesqv_users";
 
-        foreach ($json_data as $value) {
-            $obj = new stdClass();
+        $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname, $port);
 
-            $obj->username = $value["username"];
-            $obj->password = $value["password"];
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
+        
+        $sql = "SELECT * FROM assignment2";
+        $result = $conn->query($sql);
 
-            array_push($users, $obj);
+        if ($result->num_rows > 0) {
+
+            while($row = $result->fetch_assoc()) {
+                $obj2 = new stdClass();
+
+                $obj2->username = $row["username"];
+                $obj2->password = $row["password"];
+                array_push($users, $obj2);
+            }
         }
+        $conn->close();
+
         return $users;
     }
 
     public function saveUser($username, $password) {
-        $userObj = new stdClass();
-        $userObj->username = $username;
-        $userObj->password = $password;
+        $port = 3306;
+        $servername = "127.0.0.1";
+        $dbusername = "dnpyesqv";
+        $dbpassword = "XhBS515uxx[8;J";
+        $dbname = "dnpyesqv_users";
 
-        $oldUsers = $this->fetchUsers();
-        $newUsers = array();
-        array_push($oldUsers, $userObj);
+        $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname, $port);
 
-        $a = json_encode($oldUsers);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
 
-        file_put_contents('./data/users.json', $a);
+        $sql = "INSERT INTO assignment2 (username, password)
+        VALUES ('$username', '$password')";
+
+        $conn->close();
     }
 }
